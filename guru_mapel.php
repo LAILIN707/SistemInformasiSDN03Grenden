@@ -8,7 +8,7 @@ if (!isset($_SESSION["username"])) {
 
 $level=$_SESSION["level"];
 
-if ($level!=1) {
+if ($level!=2) {
     echo "Anda tidak punya akses pada halaman ini";
     exit;
 }
@@ -18,13 +18,8 @@ $username=$_SESSION["username"];
 $nama=$_SESSION["nama"];
 $email=$_SESSION["email"];
 
-?>
 
-<?php 
-    include_once("config.php");
-    $query = mysqli_query($kon, "Select * from data_guru");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,20 +48,19 @@ $email=$_SESSION["email"];
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="tu_beranda.php">SDN 03 Grenden</a>
+            <a class="navbar-brand" href="guru_beranda.php">SDN 03 Grenden</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link" href="tu_data_siswa.php">Data Siswa</a></li>
-                    <li class="nav-item"><a class="nav-link" href="tu_data_guru.php">Data Guru</a></li>
-                    <li class="nav-item"><a class="nav-link" href="tu_absensi.php">Absensi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="guru_mapel.php">Jadwal Mengajar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="guru_absensi.php">Absensi</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?php echo $nama; ?></a>
                         <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="tu_beranda.php">Beranda</a></li>
-                        <li><a class="dropdown-item" href="tu_profile.php">Profile</a></li>
+                        <li><a class="dropdown-item" href="guru_beranda.php">Beranda</a></li>
+                        <li><a class="dropdown-item" href="guru_profile.php">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                         </ul>
@@ -86,7 +80,7 @@ $email=$_SESSION["email"];
                 <div class="col-lg-8 align-self-baseline">
                     <p class="text-white-75 mb-5">SDN Grenden 03 adalah Sekolah Dasar (SD) Negeri yang berlokasi di
                         Propinsi Jawa Timur Kabupaten Kab. Jember dengan alamat Jl. Raya Puger No. 205 - Puger.</p>
-                    <a class="btn btn-primary btn-xl" href="#Data_Guru">Get Started!</a>
+                    <a class="btn btn-primary btn-xl" href="#Mapel">Get Started!</a>
                 </div>
             </div>
         </div>
@@ -101,17 +95,17 @@ $email=$_SESSION["email"];
                     <p class="text-white-75 mb-4">SDN Grenden 03 adalah Sekolah Dasar (SD) Negeri yang berlokasi di
                         Propinsi Jawa Timur Kabupaten Kab. Jember dengan alamat Jl. Raya Puger No. 205 - Puger.
                         Didirikan pada tanggal :2007-06-20</p>
-                    <a class="btn btn-light btn-xl" href="#Data_Guru">Get Started!</a>
+                    <a class="btn btn-light btn-xl" href="#Mapel">Get Started!</a>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Data Guru -->
-    <<section class="page-section" id="Data_Guru">
+    <!-- Jadwal Guru -->
+    <<section class="page-section" id="Data_Siswa">
         <div class="container px-9 px-lg-19">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-8 col-xl-6 text-center">
-                    <h2 class="mt-0">Data Guru </h2>
+                    <h2 class="mt-0">Data Siswa</h2>
                     <hr class="divider" />
                 </div>
             </div>
@@ -120,37 +114,68 @@ $email=$_SESSION["email"];
                 <table class="table">
                     <thead>
                         <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Password</th>
-                        <th scope="col">Nama Lengkap</th>
-                        <th scope="col">NIP</th>
-                        <th scope="col">Alamat</th>
-                        <th scope="col">Guru Mapel</th>
-                        <th colspan="2" class="text-center">Aksi</th>
+                        <th scope="col">Senin</th>
+                        <th scope="col">Selasa</th>
+                        <th scope="col">Rabu</th>
+                        <th scope="col">Kamis</th>
+                        <th scope="col">Jumat</th>
+                        <th scope="col">Sabtu</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php
-                        while($data = mysqli_fetch_array($query)){
-                            echo "<tr>";
-                            echo "<td>".$data['id']."</td>";
-                            echo "<td>".$data['username']."</td>";
-                            echo "<td>".$data['password']."</td>";
-                            echo "<td>".$data['nama_lengkap']."</td>";
-                            echo "<td>".$data['nip']."</td>";
-                            echo "<td>".$data['alamat_guru']."</td>";
-                            echo "<td>".$data['guru_mapel']."</td>";
-                            echo "<td><a href ='tu_data_guru_hapus.php?id=".$data['id']."'>Hapus</td>";
-                            echo "<td><a href ='tu_data_guru_edit.php?id=".$data['id']."'>Edit</td>";
-                            echo "</tr>";
-                        }
-                    ?>
+                    <tr>
+                        <th scope="col">P. Alvi</th>
+                        <th scope="col">P. Fadly</th>
+                        <th scope="col">B. Amanda</th>
+                        <th scope="col">B. Andhi</th>
+                        <th scope="col">B. Nisa</th>
+                        <th scope="col">B. Nadia</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">P. Alvi</th>
+                        <th scope="col">P. Fadly</th>
+                        <th scope="col">B. Amanda</th>
+                        <th scope="col">B. Andhi</th>
+                        <th scope="col">B. Nisa</th>
+                        <th scope="col">B. Nadia</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">B. Nisa</th>
+                        <th scope="col">B. Desi</th>
+                        <th scope="col">B. Andhi</th>
+                        <th scope="col">B. Amanda</th>
+                        <th scope="col">P. Aril</th>
+                        <th scope="col">P. Ahmad</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">B. Nisa</th>
+                        <th scope="col">B. Desi</th>
+                        <th scope="col">B. Andhi</th>
+                        <th scope="col">B. Amanda
+                        <th scope="col">P. Aril</th>
+                        <th scope="col">P. Ahmad</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">B. Amanda</th>
+                        <th scope="col">B. Nadia</th>
+                        <th scope="col">B. Desi</th>
+                        <th scope="col">P. Alvi</th>
+                        <th scope="col">B. Lusi</th>
+                        <th scope="col">B. Lusi</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">B. Amanda</th>
+                        <th scope="col">B. Nadia</th>
+                        <th scope="col">B. Desi</th>
+                        <th scope="col">P. Alvi</th>
+                        <th scope="col">B. Lusi</th>
+                        <th scope="col">B. Lusi</th>
+                    </tr>
                     </tbody>
                     </table>
                 </div>
                 <div class="col-lg-8 text-center">
-                    <a class="btn btn-primary btn-xl" href="tu_data_guru_tambah.php">Tambah Data</a>
+                    <a class="btn btn-primary btn-xl" href="tu_tambah_data_siswa.php">Tambah Data</a>
                 </div>
             </div>
             <div class="row gx-4 gx-lg-5 justify-content-center">

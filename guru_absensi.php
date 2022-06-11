@@ -8,7 +8,7 @@ if (!isset($_SESSION["username"])) {
 
 $level=$_SESSION["level"];
 
-if ($level!=1) {
+if ($level!=2) {
     echo "Anda tidak punya akses pada halaman ini";
     exit;
 }
@@ -48,20 +48,19 @@ $email=$_SESSION["email"];
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="tu_beranda.php">SDN 03 Grenden</a>
+            <a class="navbar-brand" href="guru_beranda.php">SDN 03 Grenden</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link" href="tu_data_siswa.php">Data Siswa</a></li>
-                    <li class="nav-item"><a class="nav-link" href="tu_data_guru.php">Data Guru</a></li>
-                    <li class="nav-item"><a class="nav-link" href="tu_absensi.php">Absensi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="guru_mapel.php">Jadwal Mengajar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="guru_absensi.php">Absensi</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?php echo $nama; ?></a>
                         <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="tu_beranda.php">Beranda</a></li>
-                        <li><a class="dropdown-item" href="tu_profile.php">Profile</a></li>
+                        <li><a class="dropdown-item" href="guru_beranda.php">Beranda</a></li>
+                        <li><a class="dropdown-item" href="guru_profile.php">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                         </ul>
@@ -81,7 +80,7 @@ $email=$_SESSION["email"];
                 <div class="col-lg-8 align-self-baseline">
                     <p class="text-white-75 mb-5">SDN Grenden 03 adalah Sekolah Dasar (SD) Negeri yang berlokasi di
                         Propinsi Jawa Timur Kabupaten Kab. Jember dengan alamat Jl. Raya Puger No. 205 - Puger.</p>
-                    <a class="btn btn-primary btn-xl" href="#Tambah_Data_Guru">Get Started!</a>
+                    <a class="btn btn-primary btn-xl" href="#Absensi">Get Started!</a>
                 </div>
             </div>
         </div>
@@ -96,23 +95,30 @@ $email=$_SESSION["email"];
                     <p class="text-white-75 mb-4">SDN Grenden 03 adalah Sekolah Dasar (SD) Negeri yang berlokasi di
                         Propinsi Jawa Timur Kabupaten Kab. Jember dengan alamat Jl. Raya Puger No. 205 - Puger.
                         Didirikan pada tanggal :2007-06-20</p>
-                    <a class="btn btn-light btn-xl" href="#Tambah_Data_Guru">Get Started!</a>
+                    <a class="btn btn-light btn-xl" href="#Absensi">Get Started!</a>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Tambah_Data_Guru -->
-    <section class="page-section" id="Tambah_Data_Guru">
+    <!-- Absensi-->
+    <section class="page-section" id="Absensi">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-8 col-xl-6 text-center">
-                    <h2 class="mt-0">Tambah Data Guru</h2>
+                    <h2 class="mt-0">Absensi</h2>
                     <hr class="divider" />
                 </div>
             </div>
             <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
                 <div class="col-lg-6">
                     <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                        <!-- Input NIS-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" name="nip" id="name" type="text" placeholder="Enter your name..."
+                                data-sb-validations="required" />
+                            <label for="name">NIP</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                        </div>
                         <!-- Input Username -->
                         <div class="form-floating mb-3">
                             <input class="form-control" name="username" id="email" type="text" placeholder="name@example.com"
@@ -120,40 +126,25 @@ $email=$_SESSION["email"];
                             <label for="email">Username</label>
                             <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                         </div>
-                        <!-- Input Username -->
+                        <!-- Input Tanggal -->
                         <div class="form-floating mb-3">
-                            <input class="form-control" name="password" id="email" type="text" placeholder="name@example.com"
-                                data-sb-validations="required,email" />
-                            <label for="email">Password</label>
-                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                            <input class="form-control" name="tanggal" id="phone" type="date" placeholder="(123) 456-7890"
+                                data-sb-validations="required" />
+                            <label for="phone">Tanggal</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.
+                            </div>
                         </div>
-                        <!-- Input Username -->
+                        <!-- Layanan -->
                         <div class="form-floating mb-3">
-                            <input class="form-control" name="nama_lengkap" id="email" type="text" placeholder="name@example.com"
-                                data-sb-validations="required,email" />
-                            <label for="email">Nama Lengkap</label>
-                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                        </div>
-                        <!-- Input Username -->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" name="nip" id="email" type="text" placeholder="name@example.com"
-                                data-sb-validations="required,email" />
-                            <label for="email">NIP</label>
-                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                        </div>
-                        <!-- Input Username -->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" name="alamat_guru" id="email" type="text" placeholder="name@example.com"
-                                data-sb-validations="required,email" />
-                            <label for="email">Alamat</label>
-                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                        </div>
-                        <!-- Input Username -->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" name="guru_mapel" id="email" type="text" placeholder="name@example.com"
-                                data-sb-validations="required,email" />
-                            <label for="email">Guru Mapel</label>
-                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                            <div class="form-floating">
+                                <select name="keterangan" class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example">
+                                    <option selected value="Hadir">Hadir</option>
+                                    <option value="Ijin">Ijin</option>
+                                    <option value="Alpha">Alpha</option>
+                                </select>
+                                <label for="floatingSelect">Keterangan</label>
+                            </div>
                         </div>
                         <!-- Submit Button-->
                         <div class="d-grid"><button class="btn btn-primary btn-xl" name="Simpan" id="submitButton"
@@ -163,14 +154,12 @@ $email=$_SESSION["email"];
                             include_once("config.php");
 
                             if (isset($_POST['Simpan'])){
-                                $username = $_POST['username'];
-                                $password = $_POST['password'];
-                                $nama_lengkap = $_POST['nama_lengkap'];
                                 $nip = $_POST['nip'];
-                                $alamat_guru = $_POST['alamat_guru'];
-                                $guru_mapel = $_POST['guru_mapel'];
+                                $username = $_POST['username'];
+                                $tanggal = $_POST['tanggal'];
+                                $keterangan = $_POST['keterangan'];
 
-                                $query = mysqli_query($kon, "Insert into data_guru (username, password, nama_lengkap, nip, alamat_guru, guru_mapel) value ('$username', '$password', '$nama_lengkap', '$nip', '$alamat_guru', '$guru_mapel')");
+                                $query = mysqli_query($kon, "Insert into absensi_guru (nip, username, tanggal, keterangan) value ('$nip', '$username', '$tanggal', '$keterangan')");
                                 if ($query){
                                     echo "Berhasil Tambah Data";
                                 } else {
@@ -178,11 +167,7 @@ $email=$_SESSION["email"];
                                 }
                             }
                         ?>
-                        
                     </form>
-                    <div class="d-grid">
-                        <a class="btn btn-primary btn-xl" href="tu_data_guru.php">Kembali</a>
-                    </div>
                 </div>
             </div>
         </div>
